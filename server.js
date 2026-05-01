@@ -11,11 +11,11 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:5173',
   credentials: true
 }));
 
-//connecting to MongoDB
+//connecting to MongoDB 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MONGODB connected'))
   .catch((err) => console.log('MongoDB error:', err));

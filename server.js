@@ -16,7 +16,7 @@ app.use(cookieParser());
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
-  'https://ewura-crypto-app-project.netlify.app/' // update this after Netlify deploys
+  'https://ewura-crypto-app-project.netlify.app' // update this after Netlify deploys
 ];
 
 app.use(cors({

@@ -38,9 +38,11 @@ const register = async (req, res) => {
 
     //to store the token in an HTTP-only cookie
     res.cookie('token', token, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000
-    });
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+    maxAge: 7 * 24 * 60 * 60 * 1000
+  });
 
     res.status(201).json({
       message: 'User has been successfully registered',
@@ -72,9 +74,11 @@ const login = async (req, res) => {
 
     // Store token in HTTP-only cookie
     res.cookie('token', token, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000
-    });
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+    maxAge: 7 * 24 * 60 * 60 * 1000
+  });
 
     res.status(200).json({
       message: 'Login successful',
@@ -87,7 +91,11 @@ const login = async (req, res) => {
 
 // LOGOUT
 const logout = (req, res) => {
-  res.clearCookie('token');
+  res.clearCookie('token', {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+});
   res.status(200).json({ message: 'Logged out successfully' });
 };
 
